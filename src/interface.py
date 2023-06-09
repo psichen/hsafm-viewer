@@ -21,6 +21,8 @@ def bind_key(k):
                     'k':Qt.Key.Key_K,
                     'h':Qt.Key.Key_H,
                     'l':Qt.Key.Key_L,
+                    'd':Qt.Key.Key_D,
+                    'u':Qt.Key.Key_U,
                     'w':Qt.Key.Key_W,
                     'b':Qt.Key.Key_B,
                     'v':Qt.Key.Key_V,
@@ -319,12 +321,14 @@ class Window(QMainWindow):
                           'select folder\t:\n'
                           'next file\t\t j\n'
                           'previous file\t k\n'
-                          'toggle level\t v\n'
-                          'toggle play\t space\n'
                           'next frame\t l\n'
                           'previous frame\t h\n'
                           'jump forwards\t w\n'
                           'jump backwards\t b\n'
+                          'jump file down\t d\n'
+                          'jump file up\t u\n'
+                          'toggle level\t v\n'
+                          'toggle play\t space\n'
                           'go to head\t ^\n'
                           'go to end\t $\n'
                           'x10 forwards\t ]\n'
@@ -414,6 +418,22 @@ class Window(QMainWindow):
     def prev_file(self, keyPressed):
         if self.lst_files.currentRow() > 0:
             self.lst_files.setCurrentRow(self.lst_files.currentRow()-1)
+
+    @bind_key('d')
+    def jump_down_file(self, keyPressed):
+        step = int(self.lst_files.count()/3)
+        if self.lst_files.currentRow()+step < self.lst_files.count()-1:
+            self.lst_files.setCurrentRow(self.lst_files.currentRow()+step)
+        else:
+            self.lst_files.setCurrentRow(self.lst_files.count()-1)
+
+    @bind_key('u')
+    def jump_up_file(self, keyPressed):
+        step = int(self.lst_files.count()/3)
+        if self.lst_files.currentRow()-step > 0:
+            self.lst_files.setCurrentRow(self.lst_files.currentRow()-step)
+        else:
+            self.lst_files.setCurrentRow(0)
 
     def update(self):
         if self.lst_files.currentItem():
@@ -567,6 +587,8 @@ class Window(QMainWindow):
         self.select_folder(keyPressed=keyPressed)
         self.next_file(keyPressed=keyPressed)
         self.prev_file(keyPressed=keyPressed)
+        self.jump_down_file(keyPressed=keyPressed)
+        self.jump_up_file(keyPressed=keyPressed)
         self.next_frame(keyPressed=keyPressed)
         self.prev_frame(keyPressed=keyPressed)
         self.level(keyPressed=keyPressed)
