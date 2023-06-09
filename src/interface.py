@@ -469,6 +469,7 @@ class Window(QMainWindow):
                 self.slider.setMaximum(self.f_max)
                 self.hist.setHistogramRange(np.min(self.hsafm.height), np.max(self.hsafm.height))
                 self.index.setText(f"0/{self.f_max}")
+                self.status.setText('[,]\nheight:')
 
             elif isinstance(self.sender(), QSlider):
                 self.f_curr = self.slider.value()
@@ -611,10 +612,9 @@ class Window(QMainWindow):
                 height = self.hsafm.height[self.f_curr, row, col]
                 self.status.setText('[%d, %d]\nheight:\t%0.2f' % (col, row, height))
             else:
-                self.status.setText('')
+                self.status.setText('[,]\nheight:')
         else:
-            self.status.setText('')
-
+            self.status.setText('[,]\nheight:')
 
 if __name__ == "__main__":
     app = QApplication([])
