@@ -494,15 +494,15 @@ class Window(QMainWindow):
         self.f_curr = self.slider.value()
 
         if self.fps>0:
-            if self.f_curr == self.f_max:
-                self.f_curr = 0
-            else:
+            if self.f_curr < self.f_max:
                 self.f_curr += 1
-        elif self.fps<0:
-            if self.f_curr == 0:
-                self.f_curr = self.f_max
             else:
+                self.play_stat = 0
+        elif self.fps<0:
+            if self.f_curr > 0:
                 self.f_curr -= 1
+            else:
+                self.play_stat = 0
         self.slider.setValue(self.f_curr)
 
     @bind_key('l')
