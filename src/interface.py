@@ -477,7 +477,6 @@ class Window(QMainWindow):
 
             if self.autoLevel:
                 self.img.clear()
-                # self.img.setImage(self.hsafm.height[self.f_curr])
                 self.img.setImage(np.flip(self.hsafm.height[self.f_curr], axis=0))
                 lvls = np.quantile(self.hsafm.height[self.f_curr], [.005,.995])
                 self.hist.setLevels(*lvls)
@@ -485,7 +484,6 @@ class Window(QMainWindow):
                 lvls = self.img.getLevels()
                 self.img.clear()
                 self.img.setImage(np.flip(self.hsafm.height[self.f_curr], axis=0))
-                # self.img.setImage(self.hsafm.height[self.f_curr])
                 self.hist.setLevels(*lvls)
 
             self.view.setFocus()
@@ -498,11 +496,13 @@ class Window(QMainWindow):
                 self.f_curr += 1
             else:
                 self.play_stat = 0
+                self.timer.stop()
         elif self.fps<0:
             if self.f_curr > 0:
                 self.f_curr -= 1
             else:
                 self.play_stat = 0
+                self.timer.stop()
         self.slider.setValue(self.f_curr)
 
     @bind_key('l')
