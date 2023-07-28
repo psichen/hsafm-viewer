@@ -335,6 +335,7 @@ class Window(QMainWindow):
                           'x10 backwards\t [\n'
                           'save\t\t z\n'
                           )
+        self.msg.setWordWrap(True)
         self.status = QLabel('')
 
         self.lst_files.setMaximumWidth(200)
