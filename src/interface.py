@@ -558,13 +558,13 @@ class Window(QMainWindow):
 
     @bind_key(']')
     def accelerated_forward(self, keyPressed):
-        self.fps = 100
+        self.fps = 50
         self.play_stat = 1
         self.timer.start(abs(int(1000/self.fps)))
 
     @bind_key('[')
     def accelerated_backward(self, keyPressed):
-        self.fps = -100
+        self.fps = -50
         self.play_stat = 1
         self.timer.start(abs(int(1000/self.fps)))
 
