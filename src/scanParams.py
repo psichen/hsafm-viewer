@@ -25,7 +25,7 @@ params = [
         ['xResolution', df.xResolution, 'nm'],
         ['yResolution', df.yResolution, 'nm'],
         ['frameNumber', df.numberFramesRecorded],
-        ['frameTiem', df.frameAcqTime, 'ms'],
+        ['frameTime', df.frameAcqTime, 'ms'],
         ['fps', df.fps],
         ['tipVelocity', df.velocity, 'um/s'],
         ['sampleFreq', df.samplingFreq, 'KHz'],
